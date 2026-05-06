@@ -1,0 +1,5 @@
+/* Scroll reveal — initial states set by GSAP, no CSS needed here.
+   This file holds animation-only classes not tied to GSAP. */
+
+.navbar.scrolled { transition: background 0.3s ease, box-shadow 0.3s ease; }
+

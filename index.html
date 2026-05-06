@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduBot — Team EduBot | ICAM Strasbourg-Europe</title>
+  <meta name="description" content="EduBot: An affordable 5-axis robotic arm with integrated learning platform for educational institutions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/style.css">
+  <link rel="stylesheet" href="src/animations.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-brand"><span class="accent">Edu</span>Bot</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#story">Our Story</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#robot">The Robot</a></li>
+        <li><a href="#platform">Platform</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#future">Future</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Three.js Background Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!--
+    ── FUTURE: HERO REDESIGN ────────────────────────────────────────────────
+    Target layout: narrow left column (1/4 or 1/5 width) for the text/stats/
+    CTA, and the remaining 3/4 or 4/5 as a full-height media panel on the right.
+
+    The media panel should support either:
+      a) A video (autoplay, muted, looped — ideally a short showcase clip of
+         the arm in motion), or
+      b) A photo carousel / slideshow cycling through product/assembly shots.
+
+    Suggested approach: use CSS grid with something like
+      grid-template-columns: 1fr 4fr;
+    The left column keeps the existing .hero-content markup as-is.
+    The right column replaces .hero-visual with a <video> or a carousel
+    component (e.g. a lightweight JS class or a Swiper.js instance).
+
+    On mobile the layout already collapses to single-column; the media panel
+    should appear above the text in that context (swap DOM order or use
+    CSS order property).
+    ─────────────────────────────────────────────────────────────────────────
+  -->
+  <!-- ═══════════════════════════════════════════ HERO -->
+  <section id="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow mono">Team EduBot &nbsp;·&nbsp; ICAM Strasbourg-Europe &nbsp;·&nbsp; 2025–2026</p>
+      <h1 class="hero-title"><span class="accent">Edu</span>Bot</h1>
+      <p class="hero-tagline">Affordable robotics education.<br>Fully integrated.</p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-value mono">€620</span>
+          <span class="stat-label">Total BoM</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value mono">5</span>
+          <span class="stat-label">Axes</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value mono">≥500mm</span>
+          <span class="stat-label">Reach</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value mono">6 DoF</span>
+          <span class="stat-label">Actuated</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#team" class="btn btn-primary">Meet the Team</a>
+        <a href="#robot" class="btn btn-ghost">See the Robot →</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="assets/img/Hero.jpg" alt="EduBot robot assembly" class="hero-img-render">
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ OUR STORY -->
+  <section id="story">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag mono reveal">// our story</span>
+        <h2 class="reveal">Why We Built This</h2>
+      </div>
+
+      <div class="story-layout">
+      <p class="story-narrative reveal">In our 3rd year at ICAM Strasbourg-Europe, we had a grand total of <strong>6 hours of lab time</strong> across <strong>2 sessions</strong> to discover industrial robotics — working with a Stäubli 4-axis SCARA and a 6-axis arm. With <strong>20 students</strong> and only <strong>2 robots</strong> per group, we spent most of the time watching. When we finally got to the controls, safety stops triggered constantly — each one requiring the teacher to intervene, while the same teacher was already fielding a queue of questions from 19 other students. During one session, a finger on the 6-axis gripper snapped off mid-use — the programs we'd spent hours writing became impossible to test, and nobody could fix it on the spot. On top of all that, the robots ran on a <strong>proprietary language</strong> we'd never encounter again outside that lab. And this is how we decided to pursue EduBot as our 4th-year technical project.</p>
+
+      <div class="story-board">
+        <div class="story-col">
+          <p class="story-col-label mono">// the experience</p>
+          <div class="thought-cloud">
+            <span class="thought friction">20 students · 2 robots</span>
+            <span class="thought friction">Constant safety stop resets</span>
+            <span class="thought friction">Gripper finger snapped off</span>
+            <span class="thought friction">Proprietary language (VAL3)</span>
+            <span class="thought friction">Limited lab session time</span>
+            <span class="thought friction">Overloaded teacher</span>
+          </div>
+        </div>
+
+        <div class="story-divider">
+          <div class="divider-line"></div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4M8 12h8"/></svg>
+          <div class="divider-line"></div>
+        </div>
+
+        <div class="story-col">
+          <p class="story-col-label mono">// the spark</p>
+          <div class="thought-cloud">
+            <span class="thought spark">Affordable enough for many units</span>
+            <span class="thought spark">Safe by design for beginners</span>
+            <span class="thought spark">Student-repairable components</span>
+            <span class="thought spark">Python · C++ · Blockly — built on ROS 2</span>
+            <span class="thought spark">Integrated / independent learning</span>
+            <span class="thought spark">Self-paced independent learning</span>
+          </div>
+        </div>
+      </div>
+      </div><!-- end story-layout -->
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ ABOUT -->
+  <section id="about">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag mono reveal">// about</span>
+        <h2 class="reveal">The Problem with Robotics Education</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="reveal">Industrial robotic arms cost <strong class="accent-text">€13,000–€25,000</strong> — far beyond the reach of most schools and universities. The gap between classroom and industry remains wide, and students rarely get hands-on access to capable hardware.</p>
+          <p class="reveal">Existing educational alternatives are either too limited — few degrees of freedom, inadequate reach — or fragmented, requiring students to juggle separate platforms for theory, coding, and hardware control.</p>
+          <p class="reveal">EduBot bridges this gap: a capable 5-axis robotic arm paired with a unified learning ecosystem, all within a Bill of Materials of <strong class="accent-text">€620</strong>.</p>
+        </div>
+        <div class="about-highlights">
+          <div class="cost-comparison reveal">
+            <div class="cost-row">
+              <span class="cost-label">Industry Arm</span>
+              <div class="cost-bar industry-bar">
+                <span class="cost-value mono">€13,000 – €25,000</span>
+              </div>
+            </div>
+            <div class="cost-row">
+              <span class="cost-label">EduBot</span>
+              <div class="cost-bar edubot-bar">
+                <span class="cost-value mono accent-text">€620 BoM</span>
+              </div>
+            </div>
+          </div>
+          <div class="key-points reveal">
+            <div class="key-point"><span class="kp-check">✓</span><span>Safe: operates at ≤ 24 V DC</span></div>
+            <div class="key-point"><span class="kp-check">✓</span><span>Modular: all structural parts 3D-printable (FDM)</span></div>
+            <div class="key-point"><span class="kp-check">✓</span><span>Standard M3/M4 DIN fasteners — no proprietary parts</span></div>
+            <div class="key-point"><span class="kp-check">✓</span><span>Sustainable: aluminium + PETG, &gt;95% recyclable</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ THE ROBOT -->
+  <section id="robot">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag mono reveal">// the robot</span>
+        <h2 class="reveal">Technical Overview</h2>
+        <p class="section-sub reveal">A 5-axis serial kinematic chain built from the ground up for educational environments.</p>
+      </div>
+
+      <div class="robot-layout">
+        <div class="robot-info">
+          <div class="subsystem-grid">
+            <div class="subsystem-card reveal">
+              <div class="card-header">
+                <span class="card-num mono">01</span>
+                <h3>Mechanical</h3>
+              </div>
+              <p>5-axis serial kinematic chain. J1 base rotation (360°), J2/J3 shoulder and elbow with cycloidal gear reducers for torque, J4/J5 wrist pitch and roll, plus servo-driven parallel-jaw gripper. Structural links use 2020 aluminium extrusion profiles.</p>
+              <div class="card-tags">
+                <span class="tag mono">5 axes</span>
+                <span class="tag mono">cycloidal drive</span>
+                <span class="tag mono">Al 2020</span>
+              </div>
+            </div>
+            <div class="subsystem-card reveal">
+              <div class="card-header">
+                <span class="card-num mono">02</span>
+                <h3>Electrical &amp; Control</h3>
+              </div>
+              <p>Custom in-house PCB with Arduino Mega microcontroller. Five DMT320T stepper motor drivers with rotary encoders at each joint for closed-loop position control. 24 V DC power supply — fully safe for classroom environments.</p>
+              <div class="card-tags">
+                <span class="tag mono">custom PCB</span>
+                <span class="tag mono">Arduino Mega</span>
+                <span class="tag mono">24V DC</span>
+              </div>
+            </div>
+            <div class="subsystem-card reveal">
+              <div class="card-header">
+                <span class="card-num mono">03</span>
+                <h3>Learning Platform</h3>
+              </div>
+              <p>Next.js web application with Blockly visual editor for beginners and Python text editor for advanced users. Includes 3D digital twin, structured course modules, and ROS 2 communication — all in one interface.</p>
+              <div class="card-tags">
+                <span class="tag mono">Next.js</span>
+                <span class="tag mono">Blockly</span>
+                <span class="tag mono">ROS 2</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="specs-section">
+            <h3 class="reveal">Key Specifications</h3>
+            <div class="specs-grid reveal">
+              <div class="spec-row"><span class="spec-key">Axes</span><span class="spec-val mono">5 + gripper (6 DoF)</span></div>
+              <div class="spec-row"><span class="spec-key">Reach</span><span class="spec-val mono">≥ 500 mm</span></div>
+              <div class="spec-row"><span class="spec-key">Payload</span><span class="spec-val mono">250 g</span></div>
+              <div class="spec-row"><span class="spec-key">Positioning Accuracy</span><span class="spec-val mono">±1 mm (±5 mm at full reach)</span></div>
+              <div class="spec-row"><span class="spec-key">Max Voltage</span><span class="spec-val mono">24 V DC</span></div>
+              <div class="spec-row"><span class="spec-key">Total BoM Cost</span><span class="spec-val mono accent-text">€620</span></div>
+              <div class="spec-row"><span class="spec-key">Mass</span><span class="spec-val mono">&lt; 10 kg</span></div>
+              <div class="spec-row"><span class="spec-key">Structural Materials</span><span class="spec-val mono">Aluminium, PETG, PCTG-GF</span></div>
+              <div class="spec-row"><span class="spec-key">Communication</span><span class="spec-val mono">USB Serial · ROS 2</span></div>
+              <div class="spec-row"><span class="spec-key">Microcontroller</span><span class="spec-val mono">Arduino Mega</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!--
+          ── FUTURE: INTERACTIVE 3D MODEL ──────────────────────────────────
+          Replace this placeholder with an interactive Three.js (or similar)
+          3D model of the full EduBot assembly.
+
+          Behaviour:
+            • The model renders inline in this right column, rotating slowly
+              by default (idle animation).
+            • Clicking the model (or a "Explore assembly →" button below it)
+              enters a full-screen detail view: the rest of the page darkens
+              via a semi-transparent overlay, and the model expands to fill
+              the viewport.
+            • Inside the detail view, individual sub-assemblies are selectable
+              (highlight on hover, click to isolate). Each sub-assembly either:
+                a) Reveals a contextual info panel alongside the model, or
+                b) Navigates to a dedicated sub-assembly page (e.g.
+                   /assembly/cycloidal-drive, /assembly/pcb, etc.).
+
+          Sub-assembly pages to plan:
+            — Cycloidal Gear Reducer  → links to the same destination as the
+              Engineering Highlight card below (keep them in sync).
+            — Custom PCB / Electronics
+            — Structural Links (Al 2020 + printed parts)
+            — Wrist / End-Effector
+            — Gripper
+
+          Implementation notes:
+            • Load the GLTF/GLB model from /assets/models/edubot.glb.
+            • Use a Raycaster for click/hover hit-testing on named mesh groups.
+            • The overlay + modal state can be a simple CSS class toggle on
+              <body> (e.g. body.model-open) so other sections dim via
+              pointer-events: none; filter: brightness(0.3).
+            • Keep a fallback static image for browsers/devices that can't
+              run WebGL (the current placeholder serves this purpose).
+          ─────────────────────────────────────────────────────────────────
+        -->
+        <div class="robot-visual reveal">
+          <img src="assets/img/CAD_Assembly.png" alt="EduBot CAD assembly" class="section-img-render">
+        </div>
+      </div>
+
+      <!--
+        ── FUTURE: CYCLOIDAL DRIVE — LINK TO SUB-ASSEMBLY PAGE ─────────────
+        The image/CTA inside this card should eventually link to the same
+        dedicated page as the "Cycloidal Gear Reducer" sub-assembly in the
+        interactive 3D model above (e.g. /assembly/cycloidal-drive).
+
+        That page should contain:
+          • Isolated 3D view of the cycloidal drive
+          • Technical drawings / exploded view
+          • Key parameters (reduction ratio, torque output, BOM for just
+            this sub-assembly, print settings for the eccentric disk, etc.)
+          • Assembly instructions / video
+
+        For now, keep the highlight as a static card. When the sub-assembly
+        page exists, add an <a> or a button inside .highlight-body pointing
+        to it, and mirror that same link on the 3D model's interactive menu.
+        ─────────────────────────────────────────────────────────────────────
+      -->
+      <div class="engineering-highlight reveal">
+        <div class="highlight-header">
+          <span class="highlight-badge mono">Engineering Highlight</span>
+        </div>
+        <div class="highlight-body">
+          <div class="highlight-text">
+            <h3>Custom Cycloidal Gear Reducers</h3>
+            <p>Designed entirely in-house. <span class="mono">20:1</span> reduction ratio delivering <span class="mono">~7.7 N·m</span> output torque at joints J2 and J3 — enabling the arm's reach and payload capability at a fraction of the cost of commercial reducers.</p>
+          </div>
+          <div class="img-placeholder small-img">
+            <div class="placeholder-label">
+              <span>Cycloidal Drive — 3D Render</span>
+              <small>Add /assets/img/cycloidal-drive.png</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ LEARNING PLATFORM -->
+  <section id="platform">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag mono reveal">// learning platform</span>
+        <h2 class="reveal">One Platform. Everything You Need.</h2>
+        <p class="section-sub reveal">From beginner visual programming to advanced Python — the full learning journey in a single web interface.</p>
+      </div>
+      <div class="platform-layout">
+        <div class="platform-features">
+          <div class="feature-item reveal">
+            <div class="feature-num mono">01</div>
+            <div>
+              <h4>Blockly Visual Editor</h4>
+              <p>Drag-and-drop programming blocks for beginners. No prior coding experience required — ideal for secondary school students encountering robotics for the first time.</p>
+            </div>
+          </div>
+          <div class="feature-item reveal">
+            <div class="feature-num mono">02</div>
+            <div>
+              <h4>Python Text Editor</h4>
+              <p>Full Python programming environment for advanced users, CS students, and educators building custom curricula and complex motion sequences.</p>
+            </div>
+          </div>
+          <div class="feature-item reveal">
+            <div class="feature-num mono">03</div>
+            <div>
+              <h4>3D Digital Twin</h4>
+              <p>Simulate robot movements in a 3D virtual environment before executing commands on real hardware — safe, repeatable, and educational.</p>
+            </div>
+          </div>
+          <div class="feature-item reveal">
+            <div class="feature-num mono">04</div>
+            <div>
+              <h4>Structured Course Modules</h4>
+              <p>Embedded robotics curriculum covering theory, programming, and hands-on operation. No external LMS required — everything is in one place.</p>
+            </div>
+          </div>
+          <div class="feature-item reveal">
+            <div class="feature-num mono">05</div>
+            <div>
+              <h4>ROS 2 Communication Layer</h4>
+              <p>Translates user programs into joint motion commands over USB serial via the Robot Operating System 2 — industry-standard protocol for robotics.</p>
+            </div>
+          </div>
+        </div>
+        <div class="platform-visual">
+          <img src="assets/img/UI_interface.jpeg" alt="EduBot learning platform interface" class="platform-ui-img reveal">
+          <div class="platform-stack reveal">
+            <span class="stack-badge mono">Next.js</span>
+            <span class="stack-badge mono">Blockly</span>
+            <span class="stack-badge mono">Python</span>
+            <span class="stack-badge mono">ROS 2</span>
+            <span class="stack-badge mono">WebSockets</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ TEAM -->
+  <section id="team">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag mono reveal">// team</span>
+        <h2 class="reveal">Meet Team EduBot</h2>
+        <p class="section-sub reveal">Five engineers. One integrated system.</p>
+      </div>
+      <!--
+        ── FUTURE: PROJECT ORGANISATION BUTTON ─────────────────────────────
+        Add a button or link below (or above) the team cards — something like
+        "How we worked →" or "See our process →" — that opens either:
+          a) A modal / drawer overlay showing embedded views of:
+               • Gantt chart (e.g. screenshot or live iframe from Notion/GSheet)
+               • Notion workspace overview (public share link or screenshot)
+               • Excel planning sheets (exported as images or embedded)
+          b) A dedicated /process or /organisation page with the same content
+             laid out with more room.
+
+        Suggested HTML stub (add after .team-grid):
+          <div class="team-org-cta reveal">
+            <a href="/process" class="btn btn-ghost">How we organised ourselves →</a>
+          </div>
+
+        Content to include on that page/modal:
+          — Semester 1 vs Semester 2 Gantt (tasks, owners, milestones)
+          — Notion database structure (tasks, decisions log, meeting notes)
+          — Excel BOM + budget tracking sheet
+          — Key decision log (why cycloidal drive, why Arduino Mega, etc.)
+        ─────────────────────────────────────────────────────────────────────
+      -->
+      <div class="team-grid">
+        <div class="team-card reveal">
+          <div class="team-avatar">MM</div>
+          <h3>Matthew Muller</h3>
+          <span class="team-role mono">Main Design Lead</span>
+          <p>Original project concept; mechanical design direction; ideation and feature definition.</p>
+        </div>
+        <div class="team-card reveal">
+          <div class="team-avatar">TB</div>
+          <h3>Thibaud Bultel</h3>
+          <span class="team-role mono">Software Lead</span>
+          <p>Design and development of the learning platform and control software; feature brainstorming.</p>
+        </div>
+        <div class="team-card reveal">
+          <div class="team-avatar">JC</div>
+          <h3>Johann Creach</h3>
+          <span class="team-role mono">Electronics Designer</span>
+          <p>PCB design; electrical circuit design and wiring schematics.</p>
+        </div>
+        <div class="team-card reveal">
+          <div class="team-avatar">TÉ</div>
+          <h3>Thomas Étievant</h3>
+          <span class="team-role mono">Manufacturing Lead</span>
+          <p>3D printing; CNC machining (Datron); CAD design and manufacturing corrections; assembly.</p>
+        </div>
+        <div class="team-card reveal">
+          <div class="team-avatar">KB</div>
+          <h3>Karl Brun</h3>
+          <span class="team-role mono">Manufacturing Assistant</span>
+          <p>Assembly; CNC machining (Datron); CAD correction; part preparation. Joined Semester 2.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ RESULTS -->
+  <section id="results">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag mono reveal">// results</span>
+        <h2 class="reveal">What We Built</h2>
+        <p class="section-sub reveal">Functional prototype delivered April 2026 at ICAM Strasbourg-Europe.</p>
+      </div>
+      <div class="results-layout">
+        <div class="results-visual reveal">
+          <img src="assets/img/Final_Prototype.jpeg" alt="EduBot final prototype" class="hero-img-render">
+        </div>
+        <div class="results-grid">
+          <div class="result-card reveal">
+            <span class="result-check mono">✓</span>
+            <h4>Functional Prototype</h4>
+            <p>Full 5-axis arm demonstrated with integrated learning platform. All primary specifications met.</p>
+          </div>
+          <div class="result-card reveal">
+            <span class="result-check mono">✓</span>
+            <h4>Budget Target</h4>
+            <p>Complete BoM of €620 — a ~21× cost reduction versus industry equivalents.</p>
+          </div>
+          <div class="result-card reveal">
+            <span class="result-check mono">✓</span>
+            <h4>Safety Compliance</h4>
+            <p>System operates at ≤ 24 V DC throughout — fully safe for secondary school and university environments.</p>
+          </div>
+          <div class="result-card reveal">
+            <span class="result-check mono">✓</span>
+            <h4>Reach &amp; Payload</h4>
+            <p>≥ 500 mm reach achieved — enough to span two adjacent classroom tables. 250 g payload confirmed.</p>
+          </div>
+          <div class="result-card reveal">
+            <span class="result-check mono">✓</span>
+            <h4>Sustainability</h4>
+            <p>&gt;95% recyclable material share. Aluminium and PETG — both fully recyclable at end of life.</p>
+          </div>
+          <div class="result-card reveal">
+            <span class="result-check mono">✓</span>
+            <h4>Repairability</h4>
+            <p>All structural parts 3D-printable. Each joint independently replaceable. Standard M3/M4 DIN fasteners throughout.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!--
+    ── FUTURE: DOCUMENTATION SECTION ───────────────────────────────────────
+    Consider adding a #docs section (between Results and Future, or as part
+    of the footer area) where visitors can download project reports.
+
+    Suggested content:
+      • Semester 1 Technical Report  (PDF)
+      • Semester 2 Final Report      (PDF)
+      • BOM / Cost Breakdown         (PDF or XLSX)
+      • PCB Schematics               (PDF)
+      • Any poster / presentation slides from the final defence
+
+    Suggested layout: a simple list or card grid — each card has a document
+    icon, title, description (date / page count), and a download button.
+    Files live in /assets/docs/ and are linked with a plain <a download> tag.
+
+    Only add this section if the documents are cleared for public release
+    (check with ICAM before publishing anything marked confidential).
+    ─────────────────────────────────────────────────────────────────────────
+  -->
+
+  <!-- ═══════════════════════════════════════════ FUTURE -->
+  <section id="future">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag mono reveal">// what's next</span>
+        <h2 class="reveal">Future of the Project</h2>
+        <p class="section-sub reveal">EduBot is a foundation — here's where it can go from here.</p>
+      </div>
+      <div class="future-grid">
+        <div class="future-card reveal">
+          <div class="future-num mono">01</div>
+          <h4>Expanded Curriculum</h4>
+          <p>Develop a full course library covering inverse kinematics, trajectory planning, and computer vision — structured for secondary school through university level.</p>
+        </div>
+        <div class="future-card reveal">
+          <div class="future-num mono">02</div>
+          <h4>Multi-Robot Coordination</h4>
+          <p>Scale the platform to support multiple EduBots operating in parallel within a single classroom, enabling collaborative and competitive robotics exercises.</p>
+        </div>
+        <div class="future-card reveal">
+          <div class="future-num mono">03</div>
+          <h4>End-Effector Ecosystem</h4>
+          <p>Standardise a quick-swap tool interface so students can swap grippers, cameras, and pen tools — turning EduBot into a true multi-application platform.</p>
+        </div>
+        <div class="future-card reveal">
+          <div class="future-num mono">04</div>
+          <h4>Open-Source Release</h4>
+          <p>Publish all CAD files, PCB schematics, and platform source code under an open licence — letting institutions worldwide build, adapt, and improve EduBot.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ FOOTER -->
+  <footer id="contact">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="brand-name"><span class="accent">Edu</span>Bot</span>
+          <span class="brand-sub">Affordable robotics education. Fully integrated.</span>
+        </div>
+        <nav class="footer-nav">
+          <a href="#about">About</a>
+          <a href="#robot">The Robot</a>
+          <a href="#platform">Platform</a>
+          <a href="#team">Team</a>
+          <a href="#results">Results</a>
+          <a href="#future">Future</a>
+        </nav>
+      </div>
+      <div class="footer-mid">
+        <div class="footer-info-block">
+          <span class="footer-label mono">Team EduBot</span>
+          <span>Matthew Muller &nbsp;·&nbsp; Thibaud Bultel &nbsp;·&nbsp; Johann Creach &nbsp;·&nbsp; Thomas Étievant &nbsp;·&nbsp; Karl Brun</span>
+        </div>
+        <div class="footer-info-block">
+          <span class="footer-label mono">Institution</span>
+          <span>ICAM Strasbourg-Europe &nbsp;·&nbsp; Academic Year 2025–2026</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 EduBot Team EduBot — ICAM Strasbourg-Europe</span>
+        <a href="#hero" class="back-to-top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/three@0.165.0/build/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="src/main.js"></script>
+</body>
+</html>
